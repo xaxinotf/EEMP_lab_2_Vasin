@@ -46,8 +46,11 @@ Profit_short = p * A * K_fixed**alpha * L**(1-alpha) - (r * K_fixed + w * L)
 p_monopoly = p * 1.2  # припущення, що фірма може збільшити ціну
 #Profit_monopoly = p_monopoly * A * K**alpha * L**(1-alpha) - (r * K + w * L)
 # Фірма в умовах монополії-монопсонії
-Profit_monopoly = p_monopoly * F - (r * K + w * L)
+#Profit_monopoly = p_monopoly * F - (r * K + w * L)
+wK_monopoly = r * 1.5  # Припустимо, що ціна капіталу збільшується
+wL_monopoly = w * 1.2   # Припустимо, що ціна праці збільшується
 
+Profit_monopoly = p_monopoly * F - (wK_monopoly * K + wL_monopoly * L)
 # Пункт 1: Вивід результатів
 results_1 = pd.DataFrame({
     'LnK': log_K,
@@ -88,10 +91,14 @@ results_3 = pd.DataFrame({
     'Profit': [Profit_long.sum(), Profit_short.sum()]
 })
 
+
+
+
+# Відображення результатів для монополії-монопсонії
 results_4 = pd.DataFrame({
     'p': [p_monopoly],
-    'wK': [r],
-    'wL': [w],
+    'wK': [wK_monopoly],
+    'wL': [wL_monopoly],
     'Profit': [Profit_monopoly.sum()],
     'F': [F.sum()]
 })
